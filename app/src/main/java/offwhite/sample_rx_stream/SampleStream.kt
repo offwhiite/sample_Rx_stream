@@ -1,18 +1,15 @@
 package offwhite.sample_rx_stream
 
-import io.reactivex.Maybe
-import io.reactivex.MaybeOnSubscribe
-import io.reactivex.Observable
-import io.reactivex.Single
+import io.reactivex.*
 
 /**
- * ストリーム作成のサンプル
+ * ストリーム作成のサンプル(基本)
  *
  * ・ストリームの作成
  *     ・Observable
  *     ・Single
- *     ・Flowable
  *     ・Maybe
+ *     ・Completable
  * ・データソースの設定
  *     ・fromArray
  *     ・create
@@ -74,4 +71,23 @@ class SampleStream {
             }
         }
     }
+
+    /**
+     * サンプル４：リストのストリームを生成する(Completable)
+     */
+    fun getStringListStreamFromCompletable() : Completable {
+
+        //
+        return Completable.create{
+            emitter ->
+
+            // CompletableはonCompleteのみ実行できます。
+            // つまり、値を返さないストリームです。
+            // 利用用途としては"このタイミングでAPIからデータは取得するけど、特に画面に反映させない"
+            // ような場合に使うかなと思います。
+            emitter.onComplete()
+        }
+    }
+
+
 }
